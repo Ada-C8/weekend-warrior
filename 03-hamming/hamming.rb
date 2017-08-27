@@ -7,33 +7,32 @@ class Hamming
   end
 
   def compute  #compare the two strands
-    equal_length = false
+    length = nil
     if @strand1.length == @strand2.length
-      equal_length = true
+      equal_length = @strand1.length
     else
       raise ArgumentError.new("Strands must be equal in length in order to compare")
     end
 
-    strand1_arr = @strand1.split
-    strand2_arr = @strand2.split
+    strand1_arr = @strand1.split("")
+    strand2_arr = @strand2.split("")
 
-    distance = 0
+    @distance = 0
     i = 0
-    n = 0
-    strand1_arr.times do
-      if strand1_arr[n] != strand2_arr[i]
-        distance += 1
+
+    strand1_arr.each do |value|
+      if value != strand2_arr[i]
+        @distance += 1
       end
-      i += 1
-      n += 1
+        i += 1
     end
 
-    return distance
+    puts @distance
 
   end
 
 end
 
-hamming = Hamming.new("AAAA", "ABAB")
+hamming = Hamming.new("AAAACA", "ABABCB")
 puts hamming
 puts hamming.compute
