@@ -12,7 +12,7 @@ class Alouette
   def self.verse(verse_num)
     first_lines = "Je te plumerai "
     lines_array = Alouette.lines_for_verse(verse_num)
-    verse = (first_lines + lines_array.last.slice(3..-2) + ".\n") * 2
+    verse = (first_lines + lines_array.first.slice(3..-2) + ".\n") * 2
     lines_array.each do |line|
       verse += (line + "\n") * 2
     end
@@ -24,7 +24,19 @@ class Alouette
   end
 
   def self.sing
+    refrain = "Alouette, gentille alouette,\nAlouette, je te plumerai."
+
+    song = refrain
+
+    i = 0
+
+    until i == 8
+      song += "\n\n" + Alouette.verse(i) + "\n\n" + refrain
+      i += 1
+    end
+
+    return song
   end
 end
 
-puts Alouette.verse(3)
+puts Alouette.sing
